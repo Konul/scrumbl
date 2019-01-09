@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>	</title>
+	<style type="text/css">
+		.center{
+			height: 400px;
+			width: 500px;
+			margin: 100px auto;
+			background-color: #fff;
+			border: 2px solid #cecece;
+			border-radius: 10px;
+			padding: 20px;
+		}
+
+		.body-bg{ background-color: #f6be88; }
+		.input-st{ 
+			padding: 5px 10px;
+			width: 95%;
+		}
+		.word{
+			font-size: 25px;
+			color: #161616;
+		}
+		.score{ 
+			color: #94030a;
+			font-size: 20px;
+		}
+
+		.btn{ 
+			background-color: #f6be88;
+			padding: 5px 10px;
+			text-transform: uppercase;
+			margin-top: 40px;
+		}
+		.font-s{ font-size: 22px; }
+	</style>
+</head>
+<body class="body-bg">
+	<form class="center">
+		<h1></h1>
+		<h2></h2>
+		<input type="text" class="input-st">
+		<button class="btn" type="submit">submit</button>
+		<button class="btn" >help</button>
+		<h3 class="score"></h3>
+		<p class="font-s "></p>
+	</form>
+</body>
+
+<script
+	src="https://code.jquery.com/jquery-2.2.4.min.js"
+	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	crossorigin="anonymous">		
+</script>
+
+<script type="text/javascript">
+	document.getElementsByTagName('button')[0].addEventListener("click", check);
+	document.getElementsByTagName('button')[1].addEventListener("click", show);
+	var a = "";
+	var randword;
+	var mywords = [];
+	var score = 0;
+
+	function choice() {
+		var words = [ "punishment", "right", "speak", "language", "javascript", "idea", "poor", "rich", "brother", "sister", "family", "mother", "father", "check", "love", "home", "baby", "thin", "count", "hungry", "angry", "specific", "voice", "boss", "point", "relationship", "relax", "machine", "money", "monkey", "donkey", "belt", "star", "moon", "arrow", "heart", "hot", "cold", "sunny", "among", "amount", "argue", "article", "attention", "authority", "community", "conference", "discussion", "drop", "drug", "drive", 'system','teacher','spend','speed','ugly','union','vessel','victory','virus','visit','wash','weak','wrong', 'year', 'wound','exstensive','external','factory', 'familiar','external','explain','earn','dust','drink','dramatic','drop','double','door','duty','dominate','door','disaster',,'discover'];
+		randword = words[Math.floor(Math.random() * words.length)];
+		var arr = [];
+		var str = "";
+		while (arr.length < randword.length){
+			randletnum = Math.floor(Math.random() * randword.length);
+    		check = arr.indexOf(randletnum);
+    		if (check==-1) {
+    			arr.push(randletnum);
+    		}
+		}
+
+		for (var i = 0; i < randword.length; i++) {
+			str += randword[arr[i]];
+		}
+		document.getElementsByTagName('h1')[0].innerHTML = str;
+	}
+	choice();
+
+	var empty = "";
+	function check(e) {
+		e.preventDefault();
+		var values = document.getElementsByTagName('input')[0].value;
+		if (randword==values) {
+			if (!$('h2').hasClass('abc')) {
+				score = score + 1;
+			}
+			choice();
+			document.getElementsByTagName('h3')[0].innerHTML = "Score: " + score;
+		}else{ $('p').text("Check Again") }
+		document.getElementsByTagName('h2')[0].style.display = "none";
+		document.getElementsByTagName('input')[0].value = empty;
+	}
+
+	function show(e) {
+		e.preventDefault();
+		$('h2').addClass('abc');
+		document.getElementsByTagName('h2')[0].innerHTML = randword;
+		document.getElementsByTagName('h2')[0].style.display = "block";
+	}
+	
+
+</script>
+</html>
